@@ -1,43 +1,18 @@
-// Parent Animal module
-    const Animal = (function (name, height, weight, diet){
-        let name = null;
-        let height = null;
-        let weight = null;
-        let diet = null;
-
-        function getName() {
-            return name;
-        }
-
-        function setName(aName){
-            name = aName;
-        }
-
-        function getHeight() {
-            return name;
-        }
-
-        function setHeight(aHeight){
-            height = aHeight;
-        }
-        function getWeight() {
-            return name;
-        }
-
-        function setWeight(aName){
-            name = aName;
-        }
-        function getDiet() {
-            return name;
-        }
-
-        function setDiet(aName){
-            name = aName;
-        }
-
-    })();
+    // Parent Animal constructor
+    function Animal(name, height, weight, diet){
+        this.name = name;
+        this.name = height;
+        this.weight = weight;
+        this.diet = diet;
+    }
     // Create Dino Constructor
-
+    function Dino(name, height, weight, diet, species, where, when, fact){
+        Animal.call(this, name, height, weight, diet);
+        this.species = species;
+        this.where = where;
+        this.when = when;
+        this.fact = fact;
+    }
     // Create Dino Objects
 
 
