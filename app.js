@@ -1,6 +1,42 @@
+// Parent Animal module
+    const Animal = (function (name, height, weight, diet){
+        let name = null;
+        let height = null;
+        let weight = null;
+        let diet = null;
 
+        function getName() {
+            return name;
+        }
+
+        function setName(aName){
+            name = aName;
+        }
+
+        function getHeight() {
+            return name;
+        }
+
+        function setHeight(aHeight){
+            height = aHeight;
+        }
+        function getWeight() {
+            return name;
+        }
+
+        function setWeight(aName){
+            name = aName;
+        }
+        function getDiet() {
+            return name;
+        }
+
+        function setDiet(aName){
+            name = aName;
+        }
+
+    })();
     // Create Dino Constructor
-
 
     // Create Dino Objects
 
@@ -33,4 +69,5 @@
 const button = document.getElementById('btn');
 button.addEventListener("click", event=>{
     console.log("button clicked!");
+    //TODO: Hide form & display grid
 })
