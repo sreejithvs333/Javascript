@@ -14,7 +14,21 @@
         this.fact = fact;
     }
     // Create Dino Objects
-
+    let dinoArray = [];
+    fetch("./dino.json").then(res=>{
+        if(res.ok) {
+            return res.json()
+        }else {
+            throw new Error('Oops! Something went wrong! Please try again.');
+        }
+    }).then(data=>{
+        //TODO: remove log
+        console.log(data);
+        dinoArray = [...data.Dinos];
+        console.log(dinoArray);
+    }).catch(error=>{
+        console.log(error);
+    });
 
     // Create Human Object
 
