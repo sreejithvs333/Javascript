@@ -30,3 +30,7 @@
 
 
 // On button click, prepare and display infographic
+const button = document.getElementById('btn');
+button.addEventListener("click", event=>{
+    console.log("button clicked!");
+})
