@@ -3,7 +3,7 @@ let humanDataForm = document.getElementById('dino-compare');
 let gridContentContainer = document.getElementById('grid');
 /**
  * @class
- * @description Represents an Animal
+ * @classdesc Represents an Animal
  * @param {number} height - The height of the Animal
  * @param {number} weight - The weight of the Animal
  * @param {string} diet - The diet of the Animal
@@ -26,7 +26,7 @@ class Animal {
 }
 /**
  * @class
- * @description Represents an Dino sub class
+ * @classdesc Represents an Dino calss which is a sub class of Animal
  * @param {number} height - The height of the Dino
  * @param {number} weight - The weight of the Dino
  * @param {string} diet - The diet of the Dino
