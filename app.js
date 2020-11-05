@@ -1,7 +1,13 @@
 //taking reference of form & grid content div
 let humanDataForm = document.getElementById('dino-compare');
 let gridContentContainer = document.getElementById('grid');
-// Parent Animal class
+/**
+ * @class
+ * @description Represents an Animal
+ * @param {number} height - The height of the Animal
+ * @param {number} weight - The weight of the Animal
+ * @param {string} diet - The diet of the Animal
+ * */
 class Animal {
     constructor(height, weight, diet) {
         this.height = height;
@@ -18,7 +24,17 @@ class Animal {
         return this.diet;
     }
 }
-// Child Dino class
+/**
+ * @class
+ * @description Represents an Dino sub class
+ * @param {number} height - The height of the Dino
+ * @param {number} weight - The weight of the Dino
+ * @param {string} diet - The diet of the Dino
+ * @param {string} species - The species of the Dino
+ * @param {string} where - The origin of the Dino
+ * @param {string} when - The period in which the Dino lived.
+ * @param {string} fact - The fact of the Dino
+ * */
 class Dino extends Animal {
     constructor(height, weight, diet, species, where, when, fact) {
         super(height, weight, diet);
