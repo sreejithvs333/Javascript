@@ -1,6 +1,8 @@
-//taking reference of form & grid content div
+// global variables
 let humanDataForm = document.getElementById('dino-compare');
 let gridContentContainer = document.getElementById('grid');
+let dinoArray = [];
+
 /**
  * @class
  * @classdesc Represents an Animal
@@ -14,16 +16,20 @@ class Animal {
         this.weight = weight;
         this.diet = diet;
     }
+
     getHeight() {
         return this.height;
     }
+
     getWeight() {
         return this.weight;
     }
+
     getDiet() {
         return this.diet;
     }
 }
+
 /**
  * @class
  * @classdesc Represents an Dino calss which is a sub class of Animal
@@ -43,6 +49,7 @@ class Dino extends Animal {
         this.when = when;
         this.fact = fact;
     }
+
     getSpecies() {
         return this.species;
     }
@@ -70,6 +77,7 @@ class Dino extends Animal {
         }
         return result;
     }
+
     getDietComparisonResult() {
         let result = "";
         if (HumanData.getDiet().toLowerCase() === this.getDiet().toLowerCase()) {
@@ -79,9 +87,11 @@ class Dino extends Animal {
         }
         return result;
     }
+
     getFact() {
         return this.fact;
     }
+
     getOrigin() {
         return `Origin is from ${this.where}.`;
     }
@@ -91,7 +101,6 @@ class Dino extends Animal {
     }
 
     getRandomFact() {
-
         // Returns an integer random number between min (included) and max (included):
         // reference: https://stackoverflow.com/questions/1527803/generating-random-whole-numbers-in-javascript-in-a-specific-range
         let randomNumber = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
@@ -126,10 +135,32 @@ class Dino extends Animal {
     getHTMLContent() {
         return `<div class="grid-item"> <h3>${this.species}</h3> <img src="./images/${this.species}.png" alt="dino image"> <p>${this.getRandomFact()}</p> </div>`;
     }
-
 }
+
+/**
+ * @class
+ * @classdesc Represents an Human calss which is also a sub class of Animal
+ * @param {string} name - The name of the Human who fills the form with id dino-compare in index.html
+ * @param {number} height - The height of the Human
+ * @param {number} weight - The weight of the Human
+ * @param {string} diet - The diet of the Human
+ * */
+class Human extends Animal {
+    constructor(name, height, weight, diet) {
+        super(height, weight, diet);
+        this.name = name;
+    }
+
+    getName() {
+        return this.name;
+    }
+
+    getHTMLContent() {
+        return `<div class="grid-item"> <h3>${this.name}</h3> <img src="./images/human.png" alt="dino image"> </div>`;
+    }
+}
+
 // Create Dino Objects
-let dinoArray = [];
 fetch("./dino.json").then(res => {
     if (res.ok) {
         return res.json()
@@ -147,20 +178,7 @@ fetch("./dino.json").then(res => {
     console.log(error);
 });
 
-// Child Human class
-class Human extends Animal {
-    constructor(name, height, weight, diet) {
-        super(height, weight, diet);
-        this.name = name;
-    }
-    getName() {
-        return this.name;
-    }
 
-    getHTMLContent() {
-        return `<div class="grid-item"> <h3>${this.name}</h3> <img src="./images/human.png" alt="dino image"> </div>`;
-    }
-}
 // Use IIFE to get human data from form
 let HumanData = (function () {
     let name = document.getElementById("name");
@@ -214,7 +232,7 @@ function getHeightInInches(feet, inches) {
 // Simple way to shuffle array
 // Reference: https://javascript.info/task/shuffle 
 function shuffle(array) {
-   return array.sort(() => Math.random() - 0.5);
+    return array.sort(() => Math.random() - 0.5);
 }
 
 // Generate Tiles for each Dino in Array
