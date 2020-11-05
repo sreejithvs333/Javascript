@@ -28,7 +28,7 @@ class Dino extends Animal {
         return this.species;
     }
 
-    compareHeight() {
+    getHeightComparisonResult() {
         compareHeight().call(this);
     }
 
@@ -44,7 +44,9 @@ fetch("./dino.json").then(res => {
 }).then(data => {
     //TODO: remove log
     console.log(data);
-    dinoArray = [...data.Dinos];
+    dinoArray = data.Dinos.map((dino)=>{
+       return new Dino(dino.height, dino.weight, dino.diet,dino.species, dino.where, dino.when, dino.fact);
+    });
     console.log(dinoArray);
 }).catch(error => {
     console.log(error);
@@ -142,4 +144,5 @@ const button = document.getElementById('btn');
 button.addEventListener("click", function (event) {
     console.log("button clicked!");
     //TODO: Hide form & display grid
+
 })
