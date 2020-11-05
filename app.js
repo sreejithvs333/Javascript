@@ -1,3 +1,6 @@
+//taking reference of form & grid content div
+let humanDataForm = document.getElementById('dino-compare');
+let gridContentContainer = document.getElementById('grid');
 // Parent Animal class
 class Animal {
     constructor(height, weight, diet) {
@@ -32,7 +35,7 @@ class Dino extends Animal {
         compareHeight().call(this);
     }
 
-    getRandomFact(){
+    getRandomFact() {
         //TODO: return random fact here
         return "sample fact";
     }
@@ -70,6 +73,10 @@ class Human extends Animal {
     getName() {
         return this.name;
     }
+
+    getHTMLContent() {
+        return `<div class="grid-item"> <h3>${this.name}</h3> <img src="./images/human.png" alt="dino image"> </div>`;
+    }
 }
 // Use IIFE to get human data from form
 let HumanData = (function () {
@@ -83,7 +90,7 @@ let HumanData = (function () {
         if (!name || !name.value || name.value === "") {
             throw new Error("Name filed can not be empty!");
         }
-        return name;
+        return name.value;
     }
     function getHeight() {
         if (!heightInFeet
@@ -101,13 +108,13 @@ let HumanData = (function () {
         if (!weight || !weight.value || weight.value === "") {
             throw new Error("Weight filed can not be empty!");
         }
-        return weight;
+        return weight.value;
     }
     function getDiet() {
         if (!diet || !diet.value || diet.value === "") {
             throw new Error("Diet filed can not be empty!");
         }
-        return diet;
+        return diet.value;
     }
     return {
         getName: getName,
@@ -142,9 +149,25 @@ function compareHeight() {
 
 
 // Generate Tiles for each Dino in Array
-
+function buildUI(human) {
+    let completeArray = [...dinoArray];
+    // Reference: https://stackoverflow.com/questions/586182/how-to-insert-an-item-into-an-array-at-a-specific-index-javascript
+    
+    completeArray.splice(4, 0, human);
+    console.log(completeArray);
+    //TODO: Build and append complete UI for grid here
+    let completeHTML = "";
+    completeArray.map(function (gridItem) {
+        completeHTML += gridItem.getHTMLContent();
+    });
+    //TODO: remove log
+    console.log(completeHTML);
+    appendHTMLContent(completeHTML);
+}
 // Add tiles to DOM
-
+function appendHTMLContent(htmlContent) {
+    gridContentContainer.innerHTML = htmlContent;
+}
 // Remove form from screen
 
 
@@ -162,9 +185,3 @@ button.addEventListener("click", function (event) {
 
 });
 
-function buildUI(human){
-    // Reference: https://stackoverflow.com/questions/586182/how-to-insert-an-item-into-an-array-at-a-specific-index-javascript
-    dinoArray.splice(4,0,human);
-    console.log(dinoArray);
-    //TODO: Build and append complete UI for grid here
-}
