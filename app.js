@@ -1,6 +1,7 @@
 // global variables
-let humanDataForm = document.getElementById('dino-compare');
-let gridContentContainer = document.getElementById('grid');
+const humanDataForm = document.getElementById('dino-compare');
+const gridContentContainer = document.getElementById('grid');
+const button = document.getElementById('btn');
 let dinoArray = [];
 
 /**
@@ -160,7 +161,7 @@ class Human extends Animal {
     }
 }
 
-// Create Dino Objects
+// Fetch data from local file & Create Dino Objects
 fetch("./dino.json").then(res => {
     if (res.ok) {
         return res.json();
@@ -172,7 +173,7 @@ fetch("./dino.json").then(res => {
         return new Dino(dino.height, dino.weight, dino.diet, dino.species, dino.where, dino.when, dino.fact);
     });
 }).catch(error => {
-    console.log(error);
+    alert(error.message);
 });
 
 // Use IIFE to get human data from form
@@ -225,15 +226,20 @@ let HumanData = (function () {
     }
 })();
 
+// returns height value in inches
 function getHeightInInches(feet, inches) {
     return (feet * 12) + inches;
 }
 
-// Simple way to shuffle array
-// Reference: https://javascript.info/task/shuffle 
-function shuffle(array) {
-    return array.sort(() => Math.random() - 0.5);
-}
+// On button click, prepare and display infographic
+button.addEventListener("click", () => {
+    try {
+        let human = new Human(HumanData.getName(), HumanData.getHeight(), HumanData.getWeight(), HumanData.getDiet());
+        buildUI(human);
+    } catch (error) {
+        alert(error.message);
+    }
+});
 
 // Generate Tiles for each Dino in Array
 function buildUI(human) {
@@ -249,9 +255,10 @@ function buildUI(human) {
     appendHTMLContent(completeHTML);
 }
 
-// Add tiles to DOM
-function appendHTMLContent(htmlContent) {
-    gridContentContainer.innerHTML = htmlContent;
+// Simple way to shuffle array
+// Reference: https://javascript.info/task/shuffle 
+function shuffle(array) {
+    return array.sort(() => Math.random() - 0.5);
 }
 
 // Remove form from screen
@@ -260,14 +267,9 @@ function hideFormAndShowGrid() {
     gridContentContainer.style.display = "flex";
 }
 
-// On button click, prepare and display infographic
-const button = document.getElementById('btn');
-button.addEventListener("click", function (event) {
-    try {
-        let human = new Human(HumanData.getName(), HumanData.getHeight(), HumanData.getWeight(), HumanData.getDiet());
-        buildUI(human);
-    } catch (error) {
-        alert(error.message);
-    }
-});
+// Add tiles to DOM
+function appendHTMLContent(htmlContent) {
+    gridContentContainer.innerHTML = htmlContent;
+}
+
 
