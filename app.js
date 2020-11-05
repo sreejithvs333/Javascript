@@ -11,7 +11,7 @@ class Animal {
     getWeight() {
         return this.weight;
     }
-    getDiet(){
+    getDiet() {
         return this.diet;
     }
 }
@@ -24,7 +24,7 @@ class Dino extends Animal {
         this.when = when;
         this.fact = fact;
     }
-    getSpecies(){
+    getSpecies() {
         return this.species;
     }
 
@@ -44,15 +44,15 @@ fetch("./dino.json").then(res => {
 }).then(data => {
     //TODO: remove log
     console.log(data);
-    dinoArray = data.Dinos.map((dino)=>{
-       return new Dino(dino.height, dino.weight, dino.diet,dino.species, dino.where, dino.when, dino.fact);
+    dinoArray = data.Dinos.map((dino) => {
+        return new Dino(dino.height, dino.weight, dino.diet, dino.species, dino.where, dino.when, dino.fact);
     });
     console.log(dinoArray);
 }).catch(error => {
     console.log(error);
 });
 
-// Create Human Object
+// Child Human class
 class Human extends Animal {
     constructor(name, height, weight, diet) {
         super(height, weight, diet);
@@ -115,9 +115,9 @@ function getHeightInInches(feet, inches) {
 // Create Dino Compare Method 1
 // NOTE: Weight in JSON file is in lbs, height in inches. 
 function compareHeight() {
-    if (HumanData.getHeight() < this.getHeight()){
+    if (HumanData.getHeight() < this.getHeight()) {
         console.log(`${this.getSpecies()} is taller than you!`);
-    } else if(HumanData.getHeight() === this.getHeight()){
+    } else if (HumanData.getHeight() === this.getHeight()) {
         console.log(`You and ${this.getSpecies()} have same height!`);
     } else {
         console.log(`You are taller than ${this.getSpecies()}!`);
@@ -143,9 +143,9 @@ function compareHeight() {
 const button = document.getElementById('btn');
 button.addEventListener("click", function (event) {
     console.log("button clicked!");
-    try{
-        let person = new Human(HumanData.getName(),HumanData.getHeight(), HumanData.getWeight(), HumanData.getDiet()); 
-    } catch (error){
+    try {
+        let person = new Human(HumanData.getName(), HumanData.getHeight(), HumanData.getWeight(), HumanData.getDiet());
+    } catch (error) {
         alert(error.message);
     }
     //TODO: Hide form & display grid
