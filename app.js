@@ -84,7 +84,7 @@ let HumanData = (function () {
             || heightInFeet.value === ""
             || !heightInInches.value === ""
         ) {
-            throw new Error("Height feet filed can not be empty!");
+            throw new Error("Height fileds can not be empty!");
         }
         return getHeightInInches(heightInFeet.value, heightInInches.value);
     }
@@ -143,6 +143,11 @@ function compareHeight() {
 const button = document.getElementById('btn');
 button.addEventListener("click", function (event) {
     console.log("button clicked!");
+    try{
+        let person = new Human(HumanData.getName(),HumanData.getHeight(), HumanData.getWeight(), HumanData.getDiet()); 
+    } catch (error){
+        alert(error.message);
+    }
     //TODO: Hide form & display grid
 
 })
