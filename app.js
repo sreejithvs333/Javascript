@@ -32,12 +32,76 @@ class Dino extends Animal {
     }
 
     getHeightComparisonResult() {
-        compareHeight().call(this);
+        let result = "";
+        if (HumanData.getHeight() < this.getHeight()) {
+            result = `${this.getSpecies()} is taller than you!`;
+        } else if (HumanData.getHeight() === this.getHeight()) {
+            result = `You and ${this.getSpecies()} have same height!`;
+        } else {
+            result = `You are taller than ${this.getSpecies()}!`;
+        }
+        return result;
+    }
+
+    getWeightComparisonResult() {
+        let result = "";
+        if (HumanData.getWeight() < this.getWeight()) {
+            result = `${this.getSpecies()} is heavier than you!`;
+        } else if (HumanData.getWeight() === this.getWeight()) {
+            result = `You and ${this.getSpecies()} have same weight!`;
+        } else {
+            result = `You are heavier than ${this.getSpecies()}!`;
+        }
+        return result;
+    }
+    getDietComparisonResult() {
+        let result = "";
+        if (HumanData.getDiet().toLowerCase() === this.getDiet().toLowerCase()) {
+            result = `You and ${this.getSpecies()} are ${this.getDiet()}!`;
+        } else {
+            result = `You are ${HumanData.getDiet().toLowerCase()} and the ${this.getSpecies()} is ${this.getDiet().toLowerCase()}!`;
+        }
+        return result;
+    }
+    getFact() {
+        return this.fact;
+    }
+    getOrigin() {
+        return `Origin is from ${this.where}.`;
+    }
+
+    getPeriod() {
+        return `Lived in ${this.when} period.`;
     }
 
     getRandomFact() {
+
+        // Returns an integer random number between min (included) and max (included):
+        // reference: https://stackoverflow.com/questions/1527803/generating-random-whole-numbers-in-javascript-in-a-specific-range
+        let randomNumber = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
         //TODO: return random fact here
-        return "sample fact";
+        let fact = "";
+        switch (randomNumber) {
+            case 1:
+                fact = this.getWeightComparisonResult();
+                break;
+            case 2:
+                fact = this.getHeightComparisonResult();
+                break;
+            case 3:
+                fact = this.getDietComparisonResult();
+                break;
+            case 4:
+                fact = this.getOrigin();
+                break;
+            case 5:
+                fact = this.getPeriod();
+                break;
+            case 6:
+                fact = this.getFact();
+                break;
+        }
+        return fact;
     }
 
     getHTMLContent() {
@@ -128,31 +192,11 @@ function getHeightInInches(feet, inches) {
     return (feet * 12) + inches;
 }
 
-// Create Dino Compare Method 1
-// NOTE: Weight in JSON file is in lbs, height in inches. 
-function compareHeight() {
-    if (HumanData.getHeight() < this.getHeight()) {
-        console.log(`${this.getSpecies()} is taller than you!`);
-    } else if (HumanData.getHeight() === this.getHeight()) {
-        console.log(`You and ${this.getSpecies()} have same height!`);
-    } else {
-        console.log(`You are taller than ${this.getSpecies()}!`);
-    }
-}
-
-// Create Dino Compare Method 2
-// NOTE: Weight in JSON file is in lbs, height in inches.
-
-
-// Create Dino Compare Method 3
-// NOTE: Weight in JSON file is in lbs, height in inches.
-
-
 // Generate Tiles for each Dino in Array
 function buildUI(human) {
     let completeArray = [...dinoArray];
     // Reference: https://stackoverflow.com/questions/586182/how-to-insert-an-item-into-an-array-at-a-specific-index-javascript
-    
+
     completeArray.splice(4, 0, human);
     console.log(completeArray);
     //TODO: Build and append complete UI for grid here
@@ -170,7 +214,7 @@ function appendHTMLContent(htmlContent) {
     gridContentContainer.innerHTML = htmlContent;
 }
 // Remove form from screen
-function hideFormAndShowGrid(){
+function hideFormAndShowGrid() {
     humanDataForm.style.display = "none";
     gridContentContainer.style.display = "flex";
 }
