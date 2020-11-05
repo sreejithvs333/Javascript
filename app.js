@@ -32,6 +32,15 @@ class Dino extends Animal {
         compareHeight().call(this);
     }
 
+    getRandomFact(){
+        //TODO: return random fact here
+        return "sample fact";
+    }
+
+    getHTMLContent() {
+        return `<div class="grid-item"> <h3>${this.species}</h3> <img src="./images/${this.species}.png" alt="dino image"> <p>${this.getRandomFact()}</p> </div>`;
+    }
+
 }
 // Create Dino Objects
 let dinoArray = [];
@@ -144,10 +153,18 @@ const button = document.getElementById('btn');
 button.addEventListener("click", function (event) {
     console.log("button clicked!");
     try {
-        let person = new Human(HumanData.getName(), HumanData.getHeight(), HumanData.getWeight(), HumanData.getDiet());
+        let human = new Human(HumanData.getName(), HumanData.getHeight(), HumanData.getWeight(), HumanData.getDiet());
+        buildUI(human);
     } catch (error) {
         alert(error.message);
     }
     //TODO: Hide form & display grid
 
-})
+});
+
+function buildUI(human){
+    // Reference: https://stackoverflow.com/questions/586182/how-to-insert-an-item-into-an-array-at-a-specific-index-javascript
+    dinoArray.splice(4,0,human);
+    console.log(dinoArray);
+    //TODO: Build and append complete UI for grid here
+}
