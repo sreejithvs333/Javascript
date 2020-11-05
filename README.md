@@ -1,5 +1,18 @@
 # Object Oriented Javascript 
 
+## Running the code 
+
+use ```npx serve```
+View application from http://localhost:5000/
+
+## Generate documentation
+
+1. Install jsdoc globally using the following command
+```npm install -g jsdoc```
+2. Run the following command to generate documentation
+```jsdoc -d documentation app.js```
+3. Access the documentation from http://localhost:5000/documentation/
+
 ## Student Instructions
 
 ### Big Picture
