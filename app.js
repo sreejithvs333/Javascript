@@ -81,6 +81,9 @@ class Dino extends Animal {
         let randomNumber = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
         //TODO: return random fact here
         let fact = "";
+        if (this.getSpecies() === "Pigeon") {
+            return this.getFact();
+        }
         switch (randomNumber) {
             case 1:
                 fact = this.getWeightComparisonResult();
@@ -192,9 +195,15 @@ function getHeightInInches(feet, inches) {
     return (feet * 12) + inches;
 }
 
+// Simple way to shuffle array
+// Reference: https://javascript.info/task/shuffle 
+function shuffle(array) {
+   return array.sort(() => Math.random() - 0.5);
+}
+
 // Generate Tiles for each Dino in Array
 function buildUI(human) {
-    let completeArray = [...dinoArray];
+    let completeArray = [...shuffle(dinoArray)];
     // Reference: https://stackoverflow.com/questions/586182/how-to-insert-an-item-into-an-array-at-a-specific-index-javascript
 
     completeArray.splice(4, 0, human);
