@@ -1,24 +1,37 @@
 // Parent Animal class
 class Animal {
-    constructor(name, height, weight, diet) {
-        this.name = name;
-        this.name = height;
+    constructor(height, weight, diet) {
+        this.height = height;
         this.weight = weight;
         this.diet = diet;
     }
-    getName() {
-        return this.name;
+    getHeight() {
+        return this.height;
+    }
+    getWeight() {
+        return this.weight;
+    }
+    getDiet(){
+        return this.diet;
     }
 }
 // Child Dino class
 class Dino extends Animal {
-    constructor(name, height, weight, diet, species, where, when, fact) {
-        super(name, height, weight, diet);
+    constructor(height, weight, diet, species, where, when, fact) {
+        super(height, weight, diet);
         this.species = species;
         this.where = where;
         this.when = when;
         this.fact = fact;
     }
+    getSpecies(){
+        return this.species;
+    }
+
+    compareHeight() {
+        compareHeight().call(this);
+    }
+
 }
 // Create Dino Objects
 let dinoArray = [];
@@ -40,13 +53,18 @@ fetch("./dino.json").then(res => {
 // Create Human Object
 class Human extends Animal {
     constructor(name, height, weight, diet) {
-        super(name, height, weight, diet);
+        super(height, weight, diet);
+        this.name = name;
+    }
+    getName() {
+        return this.name;
     }
 }
 // Use IIFE to get human data from form
 let HumanData = (function () {
     let name = document.getElementById("name");
-    let height = document.getElementById("height");
+    let heightInFeet = document.getElementById("feet");
+    let heightInInches = document.getElementById("inches");
     let weight = document.getElementById("weight");
     let diet = document.getElementById("diet");
 
@@ -57,10 +75,16 @@ let HumanData = (function () {
         return name;
     }
     function getHeight() {
-        if (!height || !height.value || height.value === "") {
-            throw new Error("Height filed can not be empty!");
+        if (!heightInFeet
+            || !heightInInches
+            || !heightInFeet.value
+            || !heightInInches.value
+            || heightInFeet.value === ""
+            || !heightInInches.value === ""
+        ) {
+            throw new Error("Height feet filed can not be empty!");
         }
-        return height;
+        return getHeightInInches(heightInFeet.value, heightInInches.value);
     }
     function getWeight() {
         if (!weight || !weight.value || weight.value === "") {
@@ -82,9 +106,21 @@ let HumanData = (function () {
     }
 })();
 
+function getHeightInInches(feet, inches) {
+    return (feet * 12) + inches;
+}
+
 // Create Dino Compare Method 1
 // NOTE: Weight in JSON file is in lbs, height in inches. 
-
+function compareHeight() {
+    if (HumanData.getHeight() < this.getHeight()){
+        console.log(`${this.getSpecies()} is taller than you!`);
+    } else if(HumanData.getHeight() === this.getHeight()){
+        console.log(`You and ${this.getSpecies()} have same height!`);
+    } else {
+        console.log(`You are taller than ${this.getSpecies()}!`);
+    }
+}
 
 // Create Dino Compare Method 2
 // NOTE: Weight in JSON file is in lbs, height in inches.
