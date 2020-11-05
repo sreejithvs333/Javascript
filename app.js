@@ -1,17 +1,21 @@
     // Parent Animal constructor
-    function Animal(name, height, weight, diet){
-        this.name = name;
-        this.name = height;
-        this.weight = weight;
-        this.diet = diet;
+    class Animal {
+        constructor(name, height, weight, diet){
+            this.name = name;
+            this.name = height;
+            this.weight = weight;
+            this.diet = diet;
+        }
     }
     // Create Dino Constructor
-    function Dino(name, height, weight, diet, species, where, when, fact){
-        Animal.call(this, name, height, weight, diet);
-        this.species = species;
-        this.where = where;
-        this.when = when;
-        this.fact = fact;
+    class Dino extends Animal {
+        constructor(name, height, weight, diet, species, where, when, fact){
+            super(name, height, weight, diet);
+            this.species = species;
+            this.where = where;
+            this.when = when;
+            this.fact = fact;
+        }
     }
     // Create Dino Objects
     let dinoArray = [];
