@@ -163,21 +163,17 @@ class Human extends Animal {
 // Create Dino Objects
 fetch("./dino.json").then(res => {
     if (res.ok) {
-        return res.json()
+        return res.json();
     } else {
         throw new Error('Oops! Something went wrong! Please try again.');
     }
 }).then(data => {
-    //TODO: remove log
-    console.log(data);
     dinoArray = data.Dinos.map((dino) => {
         return new Dino(dino.height, dino.weight, dino.diet, dino.species, dino.where, dino.when, dino.fact);
     });
-    console.log(dinoArray);
 }).catch(error => {
     console.log(error);
 });
-
 
 // Use IIFE to get human data from form
 let HumanData = (function () {
@@ -193,6 +189,7 @@ let HumanData = (function () {
         }
         return name.value;
     }
+
     function getHeight() {
         if (!heightInFeet
             || !heightInInches
@@ -205,18 +202,21 @@ let HumanData = (function () {
         }
         return getHeightInInches(heightInFeet.value, heightInInches.value);
     }
+
     function getWeight() {
         if (!weight || !weight.value || weight.value === "") {
             throw new Error("Weight filed can not be empty!");
         }
         return weight.value;
     }
+
     function getDiet() {
         if (!diet || !diet.value || diet.value === "") {
             throw new Error("Diet filed can not be empty!");
         }
         return diet.value;
     }
+
     return {
         getName: getName,
         getHeight: getHeight,
@@ -239,23 +239,21 @@ function shuffle(array) {
 function buildUI(human) {
     let completeArray = [...shuffle(dinoArray)];
     // Reference: https://stackoverflow.com/questions/586182/how-to-insert-an-item-into-an-array-at-a-specific-index-javascript
-
     completeArray.splice(4, 0, human);
     console.log(completeArray);
-    //TODO: Build and append complete UI for grid here
     let completeHTML = "";
     completeArray.map(function (gridItem) {
         completeHTML += gridItem.getHTMLContent();
     });
-    //TODO: remove log
-    console.log(completeHTML);
     hideFormAndShowGrid();
     appendHTMLContent(completeHTML);
 }
+
 // Add tiles to DOM
 function appendHTMLContent(htmlContent) {
     gridContentContainer.innerHTML = htmlContent;
 }
+
 // Remove form from screen
 function hideFormAndShowGrid() {
     humanDataForm.style.display = "none";
@@ -265,14 +263,11 @@ function hideFormAndShowGrid() {
 // On button click, prepare and display infographic
 const button = document.getElementById('btn');
 button.addEventListener("click", function (event) {
-    console.log("button clicked!");
     try {
         let human = new Human(HumanData.getName(), HumanData.getHeight(), HumanData.getWeight(), HumanData.getDiet());
         buildUI(human);
     } catch (error) {
         alert(error.message);
     }
-    //TODO: Hide form & display grid
-
 });
 
