@@ -162,6 +162,7 @@ function buildUI(human) {
     });
     //TODO: remove log
     console.log(completeHTML);
+    hideFormAndShowGrid();
     appendHTMLContent(completeHTML);
 }
 // Add tiles to DOM
@@ -169,7 +170,10 @@ function appendHTMLContent(htmlContent) {
     gridContentContainer.innerHTML = htmlContent;
 }
 // Remove form from screen
-
+function hideFormAndShowGrid(){
+    humanDataForm.style.display = "none";
+    gridContentContainer.style.display = "flex";
+}
 
 // On button click, prepare and display infographic
 const button = document.getElementById('btn');
