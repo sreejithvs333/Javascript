@@ -248,7 +248,7 @@ function buildUI(human) {
     completeArray.splice(4, 0, human);
     console.log(completeArray);
     let completeHTML = "";
-    completeArray.map(function (gridItem) {
+    completeArray.map((gridItem) => {
         completeHTML += gridItem.getHTMLContent();
     });
     hideFormAndShowGrid();
