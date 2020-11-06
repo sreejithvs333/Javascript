@@ -134,7 +134,7 @@ class Dino extends Animal {
     }
 
     getHTMLContent() {
-        return `<div class="grid-item"> <h3>${this.species}</h3> <img src="./images/${this.species}.png" alt="dino image"> <p>${this.getRandomFact()}</p> </div>`;
+        return `<div class="grid-item"> <h3>${this.species}</h3> <img src="./images/${this.species.toLowerCase()}.png" alt="dino image"> <p>${this.getRandomFact()}</p> </div>`;
     }
 }
 
